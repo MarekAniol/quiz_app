@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_app/constants/colors.dart';
-import 'package:quiz_app/constants/strings.dart';
+import 'package:quiz_app/core/constants/colors.dart';
+import 'package:quiz_app/core/constants/strings.dart';
 import 'package:quiz_app/presentation/screens/questions_screen/questions_screen.dart';
 
 class StartQuizButton extends StatelessWidget {

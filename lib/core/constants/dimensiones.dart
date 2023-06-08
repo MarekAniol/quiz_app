@@ -7,7 +7,10 @@ abstract class Dimensiones {
 }
 
 abstract class BoxPredefined {
-  static SizedBox get largeVerticalSizedBox => const SizedBox(
+  static SizedBox get verticalSizedBox50 => const SizedBox(
         height: 50.0,
+      );
+  static SizedBox get verticalSizedBox30 => const SizedBox(
+        height: 30.0,
       );
 }

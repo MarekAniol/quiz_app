@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_app/constants/gradients.dart';
+import 'package:quiz_app/core/constants/gradients.dart';
 
 class AppGradient extends StatelessWidget {
   const AppGradient({
