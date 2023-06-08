@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_app/constants/dimensiones.dart';
+import 'package:quiz_app/core/constants/dimensiones.dart';
 import 'package:quiz_app/presentation/widgets/question_marks.dart';
 import 'package:quiz_app/presentation/widgets/start_quiz_button.dart';
 
