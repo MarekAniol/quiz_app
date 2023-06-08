@@ -1,21 +1,19 @@
-import 'package:quiz_app/domain/data_source/questions_list_data_source.dart';
-import 'package:quiz_app/domain/models/questions_list_model.dart';
 import 'package:quiz_app/locale/models/questions_list_local_model.dart';
+import 'dart:io';
+import 'dart:convert';
 
 abstract class QuestionsFakeApi {
-  QuestionsListLocalModel getQuestionList();
+  Future<QuestionsListLocalModel> getQuestionList();
 }
 
-class QuestionsFakeApiImpl implements QuestionsListDataSource {
-  QuestionsFakeApiImpl({
-    required QuestionsFakeApi questionsFakeApi,
-  }) : _questionsFakeApi = questionsFakeApi;
-
-  final QuestionsFakeApi _questionsFakeApi;
-
+class QuestionsFakeApiImpl implements QuestionsFakeApi {
   @override
-  QuestionsListModel getQuestionList() {
-    final quationsListLocalModel = _questionsFakeApi.getQuestionList();
-    return quationsListLocalModel.toDomain();
+  Future<QuestionsListLocalModel> getQuestionList() async {
+    final jsonString = await File('lib/locale/questions.json').readAsString();
+    final jsonMap = jsonDecode(jsonString);
+
+    final QuestionsListLocalModel questionsListLocalModel =
+        QuestionsListLocalModel.fromJson(jsonMap);
+    throw questionsListLocalModel;
   }
 }
