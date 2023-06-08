@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_app/constants/colors.dart';
-import 'package:quiz_app/constants/dimensiones.dart';
-import 'package:quiz_app/constants/rotations.dart';
-import 'package:quiz_app/extensions/box_constraints.dart';
+import 'package:quiz_app/core/constants/colors.dart';
+import 'package:quiz_app/core/constants/dimensiones.dart';
+import 'package:quiz_app/core/constants/rotations.dart';
+import 'package:quiz_app/core/extensions/box_constraints.dart';
 
 class QuestionMarksWidget extends StatelessWidget {
   const QuestionMarksWidget({super.key});
