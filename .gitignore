@@ -49,3 +49,9 @@ app.*.map.json
 /web/
 /ios/
 /android/
+
+# remove generated files
+**/*.freezed.dart
+**/*.g.dart
+
+**/*.gr.dart
