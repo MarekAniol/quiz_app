@@ -1,24 +1,16 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:quiz_app/domain/models/quiz_question_model.dart';
+part 'questions_list_model.freezed.dart';
 
-class QuestionsListModel {
-  QuestionsListModel({
-    required this.questions,
-  });
+@freezed
+class QuestionsListModel with _$QuestionsListModel {
+  factory QuestionsListModel({
+    required List<QuizQuestionModel> questions,
+  }) = _QuestionsListModel;
 
-  final List<QuizQuestionModel> questions;
+  const QuestionsListModel._();
 
-  factory QuestionsListModel.fromJson(List<dynamic> parsedJson) {
-    late List<QuizQuestionModel> questions;
-    questions = parsedJson
-        .map(
-          (question) => QuizQuestionModel.fromJson(
-            question,
-          ),
-        )
-        .toList();
-
-    return QuestionsListModel(
-      questions: questions,
-    );
-  }
+  factory QuestionsListModel.initial() => QuestionsListModel(
+        questions: [],
+      );
 }
