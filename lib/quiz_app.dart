@@ -13,6 +13,7 @@ class QuizApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      themeAnimationCurve: Curves.easeInToLinear,
       onGenerateRoute: appRouter.route,
       builder: (context, child) => Scaffold(
         body: AppGradient(
