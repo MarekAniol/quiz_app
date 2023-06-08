@@ -14,6 +14,6 @@ class QuestionsFakeApiImpl implements QuestionsFakeApi {
 
     final QuestionsListLocalModel questionsListLocalModel =
         QuestionsListLocalModel.fromJson(jsonMap);
-    throw questionsListLocalModel;
+    return questionsListLocalModel;
   }
 }
