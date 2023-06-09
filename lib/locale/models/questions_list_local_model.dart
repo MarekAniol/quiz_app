@@ -8,18 +8,13 @@ class QuestionsListLocalModel {
 
   final List<QuizQuestionLocalModel> questions;
 
-  factory QuestionsListLocalModel.fromJson(List<dynamic> parsedJson) {
-    late List<QuizQuestionLocalModel> questions;
-    questions = parsedJson
-        .map(
-          (question) => QuizQuestionLocalModel.fromJson(
-            question,
-          ),
-        )
-        .toList();
+  factory QuestionsListLocalModel.fromJson(Map<String, dynamic> parsedJson) {
+    final List<dynamic> list = parsedJson['questions'] as List;
+    List<QuizQuestionLocalModel> questionsList =
+        list.map((i) => QuizQuestionLocalModel.fromJson(i)).toList();
 
     return QuestionsListLocalModel(
-      questions: questions,
+      questions: questionsList,
     );
   }
 }

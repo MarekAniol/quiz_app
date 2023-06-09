@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:quiz_app/core/extensions/state_type_extension.dart';
 import 'package:quiz_app/domain/models/questions_list_model.dart';
 import 'package:quiz_app/domain/service/questions_list_service.dart';
 
@@ -26,18 +27,26 @@ class QuestionsScreenBloc extends Bloc<QuestionsScreenEvent, QuestionsScreenStat
     Emitter<QuestionsScreenState> emit,
   ) async {
     await event.map(
-      started: (value) => _mapStarted(value, emit),
+      questionsScreenStarted: (value) => _mapQuestionsScreenStarted(value, emit),
       questionReaded: (value) => _mapQuestionReaded(value, emit),
     );
   }
 
-  Future<void> _mapStarted(
+  Future<void> _mapQuestionsScreenStarted(
     _QuestionsScreenStarted event,
     Emitter<QuestionsScreenState> emit,
   ) async {
-    add(
-      const QuestionsScreenEvent.questionReaded(),
+    emit(
+      state.copyWith(
+        type: StateType.loaded,
+      ),
     );
+
+    if (state.type == StateType.loaded) {
+      add(
+        const QuestionsScreenEvent.questionReaded(),
+      );
+    }
   }
 
   Future<void> _mapQuestionReaded(
@@ -45,6 +54,7 @@ class QuestionsScreenBloc extends Bloc<QuestionsScreenEvent, QuestionsScreenStat
     Emitter<QuestionsScreenState> emit,
   ) async {
     final questionsListModel = await _questionsListService.getQuestionList();
+
     emit(
       state.copyWith(
         questionsList: questionsListModel,
