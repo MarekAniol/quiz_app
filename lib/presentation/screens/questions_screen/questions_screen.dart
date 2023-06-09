@@ -17,9 +17,6 @@ class QuestionsScreen extends StatelessWidget {
     return SizedBox(
         width: double.infinity,
         child: BlocBuilder<QuestionsScreenBloc, QuestionsScreenState>(
-          // buildWhen: (previous, current) =>
-          //     (previous.type != current.type) ||
-          //     (previous.currentQuestionIndex != current.currentQuestionIndex),
           builder: (context, state) {
             return state.type.map(
                 loading: () {

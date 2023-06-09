@@ -20,6 +20,7 @@ dependencies:
   bloc: ^8.1.2
   bloc_concurrency: ^0.2.2
   get_it: ^7.6.0
+  path_provider: ^2.0.15
 
 dev_dependencies:
   flutter_test:
@@ -31,35 +32,4 @@ flutter:
   uses-material-design: true
   assets:
     - assets/questions.json
-
-
-  
-  
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  #
-  
   
