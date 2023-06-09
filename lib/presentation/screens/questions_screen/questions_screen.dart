@@ -17,25 +17,37 @@ class QuestionsScreen extends StatelessWidget {
     return SizedBox(
         width: double.infinity,
         child: BlocBuilder<QuestionsScreenBloc, QuestionsScreenState>(
+          // buildWhen: (previous, current) =>
+          //     (previous.type != current.type) ||
+          //     (previous.currentQuestionIndex != current.currentQuestionIndex),
           builder: (context, state) {
             return state.type.map(
-                loading: () => const LoadingPage(),
+                loading: () {
+                  return const LoadingPage();
+                },
                 loaded: () {
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Text(
                         textAlign: TextAlign.center,
-                        state.questionsList.questions[0].question,
+                        state.questionsList.questions[state.currentQuestionIndex].question,
                         style: const TextStyle(
                           color: AppColors.white,
-                          fontSize: 30,
+                          fontSize: 18,
                         ),
                       ),
                       BoxPredefined.verticalSizedBox30,
-                      ...state.questionsList.questions[0].answers.map((answer) {
+                      ...state.questionsList.questions[state.currentQuestionIndex]
+                          .shuffledAnswers()
+                          .map((answer) {
                         return AnswerButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            context.read<QuestionsScreenBloc>().add(
+                                  const QuestionsScreenEvent.questionAnswered(),
+                                );
+                          },
                           answerText: answer,
                         );
                       }),
