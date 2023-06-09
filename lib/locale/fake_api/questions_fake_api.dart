@@ -1,5 +1,5 @@
+import 'package:flutter/services.dart';
 import 'package:quiz_app/locale/models/questions_list_local_model.dart';
-import 'dart:io';
 import 'dart:convert';
 
 abstract class QuestionsFakeApi {
@@ -7,9 +7,14 @@ abstract class QuestionsFakeApi {
 }
 
 class QuestionsFakeApiImpl implements QuestionsFakeApi {
+  QuestionsFakeApiImpl({
+    required this.filePath,
+  });
+
+  final String filePath;
   @override
   Future<QuestionsListLocalModel> getQuestionList() async {
-    final jsonString = await File('lib/locale/questions.json').readAsString();
+    final jsonString = await rootBundle.loadString('assets/questions.json');
     final jsonMap = jsonDecode(jsonString);
 
     final QuestionsListLocalModel questionsListLocalModel =
