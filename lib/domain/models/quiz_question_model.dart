@@ -16,4 +16,8 @@ class QuizQuestionModel with _$QuizQuestionModel {
         answers: [],
         correctAnswer: '',
       );
+
+  List<String> shuffledAnswers() {
+    return answers.toList()..shuffle();
+  }
 }
