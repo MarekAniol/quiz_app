@@ -5,11 +5,9 @@ import 'package:quiz_app/locale/quiz_data_source_impl.dart';
 import 'package:quiz_app/presentation/get_it_injector.dart';
 
 extension LocaleInector on GetIt {
-  void registerLocale({
-    required String filePath,
-  }) {
+  void registerLocale() {
     this
-      .._registerFakeApi(filePath)
+      .._registerFakeApi()
       ..registerFactory<QuizDataSource>(
         () => QuizDataSourceImpl(
           quizFakeApi: injector(),
@@ -17,9 +15,9 @@ extension LocaleInector on GetIt {
       );
   }
 
-  void _registerFakeApi(String filePath) {
+  void _registerFakeApi() {
     registerFactory<QuizFakeApi>(
-      () => QuizFakeApiImpl(filePath: filePath),
+      () => QuizFakeApiImpl(),
     );
   }
 }

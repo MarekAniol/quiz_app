@@ -9,7 +9,7 @@ class AnswersListLocalModel {
   final List<AnswerLocalModel> answers;
 
   factory AnswersListLocalModel.fromJson(Map<String, dynamic> parsedJson) {
-    final List<dynamic> list = parsedJson['Answers'] as List;
+    final List<dynamic> list = parsedJson['answers'] as List;
     List<AnswerLocalModel> answers =
         list.map((answer) => AnswerLocalModel.fromJson(answer)).toList();
 

@@ -20,4 +20,8 @@ class QuizService {
       answersListModel: answersListModel,
     );
   }
+
+  Future<AnswersListModel> getAnswersSummary() async {
+    return await _quizDataSource.getAnswersSummary();
+  }
 }

@@ -4,5 +4,7 @@ part of 'questions_screen_bloc.dart';
 class QuestionsScreenEvent with _$QuestionsScreenEvent {
   const factory QuestionsScreenEvent.questionsScreenStarted() = _QuestionsScreenStarted;
   const factory QuestionsScreenEvent.questionReaded() = _QuestionsReaded;
-  const factory QuestionsScreenEvent.questionAnswered() = _QuestionAnswered;
+  const factory QuestionsScreenEvent.questionAnswered({
+    required String answer,
+  }) = _QuestionAnswered;
 }
