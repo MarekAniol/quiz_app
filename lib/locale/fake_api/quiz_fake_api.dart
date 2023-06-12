@@ -11,21 +11,18 @@ abstract class QuizFakeApi {
   Future<void> saveAnswersToFile(
     AnswersListModel answersListModel,
   );
+  Future<AnswersListLocalModel> getAnswersSummary();
 }
 
 class QuizFakeApiImpl implements QuizFakeApi {
-  QuizFakeApiImpl({
-    required this.filePath,
-  });
+  QuizFakeApiImpl();
 
-  final String filePath;
   @override
   Future<QuestionsListLocalModel> getQuestionList() async {
     final jsonString = await rootBundle.loadString('assets/questions.json');
     final jsonMap = jsonDecode(jsonString);
 
-    final QuestionsListLocalModel questionsListLocalModel =
-        QuestionsListLocalModel.fromJson(jsonMap);
+    final questionsListLocalModel = QuestionsListLocalModel.fromJson(jsonMap);
     return questionsListLocalModel;
   }
 
@@ -35,7 +32,19 @@ class QuizFakeApiImpl implements QuizFakeApi {
     final file = File('${directory.path}/answers.json');
     final answers = answersListModel.toLocale();
     final jsonString = jsonEncode(answers.toJson());
-
     await file.writeAsString(jsonString);
+  }
+
+  @override
+  Future<AnswersListLocalModel> getAnswersSummary() async {
+    final directory = await getApplicationDocumentsDirectory();
+    final file = File('${directory.path}/answers.json');
+    final jsonString = await file.readAsString();
+    final jsonMap = jsonDecode(jsonString);
+
+    final questionsListLocalModel = AnswersListLocalModel.fromJson(
+      jsonMap,
+    );
+    return questionsListLocalModel;
   }
 }

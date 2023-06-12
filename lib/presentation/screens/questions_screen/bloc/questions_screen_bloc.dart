@@ -6,6 +6,7 @@ import 'package:quiz_app/core/extensions/state_type_extension.dart';
 import 'package:quiz_app/domain/models/answer_model.dart';
 import 'package:quiz_app/domain/models/answers_list_model.dart';
 import 'package:quiz_app/domain/models/questions_list_model.dart';
+import 'package:quiz_app/domain/models/quiz_question_model.dart';
 import 'package:quiz_app/domain/service/quiz_service.dart';
 
 part 'questions_screen_state.dart';
@@ -14,8 +15,8 @@ part 'questions_screen_bloc.freezed.dart';
 
 class QuestionsScreenBloc extends Bloc<QuestionsScreenEvent, QuestionsScreenState> {
   QuestionsScreenBloc({
-    required QuizService questionsListService,
-  })  : _questionsListService = questionsListService,
+    required QuizService quizListService,
+  })  : _quizListService = quizListService,
         super(QuestionsScreenState.initial()) {
     on<QuestionsScreenEvent>(
       onEachEvent,
@@ -23,7 +24,7 @@ class QuestionsScreenBloc extends Bloc<QuestionsScreenEvent, QuestionsScreenStat
     );
   }
 
-  final QuizService _questionsListService;
+  final QuizService _quizListService;
 
   Future<void> onEachEvent(
     QuestionsScreenEvent event,
@@ -56,7 +57,7 @@ class QuestionsScreenBloc extends Bloc<QuestionsScreenEvent, QuestionsScreenStat
     _QuestionsReaded event,
     Emitter<QuestionsScreenState> emit,
   ) async {
-    final questionsListModel = await _questionsListService.getQuestionList();
+    final questionsListModel = await _quizListService.getQuestionList();
 
     emit(
       state.copyWith(
@@ -70,6 +71,21 @@ class QuestionsScreenBloc extends Bloc<QuestionsScreenEvent, QuestionsScreenStat
     Emitter<QuestionsScreenState> emit,
   ) async {
     if (state.currentQuestionIndex < state.questionsList.questions.length - 1) {
+      final answerModel = AnswerModel(
+        question: state.questionsList.questions[state.currentQuestionIndex].question,
+        answer: event.answer,
+        isAnswerCorrect:
+            event.answer == state.questionsList.questions[state.currentQuestionIndex].correctAnswer,
+      );
+      List<AnswerModel> listOfAnswers = [...state.answers];
+      listOfAnswers.add(answerModel);
+
+      emit(
+        state.copyWith(
+          answers: listOfAnswers,
+        ),
+      );
+
       final currentQuestionIndex = state.currentQuestionIndex + 1;
       emit(
         state.copyWith(
@@ -77,31 +93,20 @@ class QuestionsScreenBloc extends Bloc<QuestionsScreenEvent, QuestionsScreenStat
         ),
       );
     } else {
+      final currentQuestionIndex = state.questionsList.questions.length;
       emit(
         state.copyWith(
           type: StateType.loading,
+          currentQuestionIndex: currentQuestionIndex,
         ),
       );
 
       final AnswersListModel answersListModel = AnswersListModel(
-        answers: [
-          AnswerModel(question: "Question1", answer: "tak", isAnswerCorrect: true),
-          AnswerModel(
-            question: "Question2",
-            answer: "tak",
-            isAnswerCorrect: false,
-          ),
-        ],
+        answers: state.answers,
       );
 
-      await _questionsListService.saveAnswersToFile(
+      await _quizListService.saveAnswersToFile(
         answersListModel: answersListModel,
-      );
-
-      emit(
-        state.copyWith(
-          type: StateType.loaded,
-        ),
       );
     }
   }

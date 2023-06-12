@@ -16,42 +16,51 @@ class QuestionsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
         width: double.infinity,
-        child: BlocBuilder<QuestionsScreenBloc, QuestionsScreenState>(
+        child: BlocConsumer<QuestionsScreenBloc, QuestionsScreenState>(
+          listenWhen: (previous, current) => current.hasReachedEndOfQuestions,
+          listener: (context, state) => state.isQuizComplete
+              ? Navigator.pushNamed(
+                  context,
+                  '/summary_screen',
+                )
+              : null,
           builder: (context, state) {
             return state.type.map(
-                loading: () {
-                  return const LoadingPage();
-                },
-                loaded: () {
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Text(
-                        textAlign: TextAlign.center,
-                        state.questionsList.questions[state.currentQuestionIndex].question,
-                        style: const TextStyle(
-                          color: AppColors.white,
-                          fontSize: 18,
-                        ),
+              loading: () {
+                return const LoadingPage();
+              },
+              loaded: () {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      textAlign: TextAlign.center,
+                      state.currentQuestionText,
+                      style: const TextStyle(
+                        color: AppColors.white,
+                        fontSize: 18,
                       ),
-                      BoxPredefined.verticalSizedBox30,
-                      ...state.questionsList.questions[state.currentQuestionIndex]
-                          .shuffledAnswers()
-                          .map((answer) {
-                        return AnswerButton(
-                          onPressed: () {
-                            context.read<QuestionsScreenBloc>().add(
-                                  const QuestionsScreenEvent.questionAnswered(),
-                                );
-                          },
-                          answerText: answer,
-                        );
-                      }),
-                    ],
-                  );
-                },
-                error: () => const LoadingPage());
+                    ),
+                    BoxPredefined.verticalSizedBox30,
+                    ...state.currentQuestionModel.shuffledAnswers().map((
+                      answer,
+                    ) {
+                      return AnswerButton(
+                        onPressed: () {
+                          context.read<QuestionsScreenBloc>().add(
+                                QuestionsScreenEvent.questionAnswered(
+                                  answer: answer,
+                                ),
+                              );
+                        },
+                        answerText: answer,
+                      );
+                    }),
+                  ],
+                );
+              },
+            );
           },
         ));
   }
