@@ -17,16 +17,16 @@ class StartQuizButton extends StatelessWidget {
       },
       style: OutlinedButton.styleFrom(
         side: const BorderSide(
-          color: AppColors.lightPrimary,
+          color: AppColors.answerButtonColor,
         ),
       ),
       icon: const Icon(
         Icons.play_arrow,
-        color: AppColors.white,
+        color: AppColors.answerButtonColor,
       ),
       label: const Text(
         style: TextStyle(
-          color: AppColors.white,
+          color: AppColors.greyBlack,
         ),
         Strings.startQuizButtonText,
       ),

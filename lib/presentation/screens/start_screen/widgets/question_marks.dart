@@ -59,7 +59,7 @@ class _SingleQuestionMarkWidget extends StatelessWidget {
       angle: angle,
       child: Icon(
         Icons.help_outline,
-        color: AppColors.whiteTransparent150,
+        color: AppColors.questionMarksColor,
         size: size,
       ),
     );

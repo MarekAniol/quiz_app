@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/core/constants/colors.dart';
 
 abstract class Gradients {
   static const LinearGradient purpleGradient = LinearGradient(
     colors: [
-      Color.fromARGB(255, 69, 7, 110),
-      Color.fromARGB(255, 105, 30, 192),
+      AppColors.greyWhite,
+      AppColors.greyWhite,
     ],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,

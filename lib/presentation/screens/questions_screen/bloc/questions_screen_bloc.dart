@@ -40,16 +40,8 @@ class QuestionsScreenBloc extends Bloc<QuestionsScreenEvent, QuestionsScreenStat
     _QuestionsScreenStarted event,
     Emitter<QuestionsScreenState> emit,
   ) async {
-    emit(
-      state.copyWith(
-        type: StateType.loaded,
-      ),
-    );
-
-    if (state.type == StateType.loaded) {
-      add(
-        const QuestionsScreenEvent.questionReaded(),
-      );
+    if (state.type == StateType.loading) {
+      add(const QuestionsScreenEvent.questionReaded());
     }
   }
 
@@ -61,7 +53,8 @@ class QuestionsScreenBloc extends Bloc<QuestionsScreenEvent, QuestionsScreenStat
 
     emit(
       state.copyWith(
-        questionsList: questionsListModel,
+        questionsListModel: questionsListModel,
+        type: StateType.loaded,
       ),
     );
   }
@@ -70,12 +63,11 @@ class QuestionsScreenBloc extends Bloc<QuestionsScreenEvent, QuestionsScreenStat
     _QuestionAnswered event,
     Emitter<QuestionsScreenState> emit,
   ) async {
-    if (state.currentQuestionIndex < state.questionsList.questions.length - 1) {
+    if (state.isNotLastQuestion) {
       final answerModel = AnswerModel(
-        question: state.questionsList.questions[state.currentQuestionIndex].question,
+        question: state.currentQuestionText,
         answer: event.answer,
-        isAnswerCorrect:
-            event.answer == state.questionsList.questions[state.currentQuestionIndex].correctAnswer,
+        isAnswerCorrect: event.answer == state.corectAnswer,
       );
       List<AnswerModel> listOfAnswers = [...state.answers];
       listOfAnswers.add(answerModel);
@@ -87,13 +79,14 @@ class QuestionsScreenBloc extends Bloc<QuestionsScreenEvent, QuestionsScreenStat
       );
 
       final currentQuestionIndex = state.currentQuestionIndex + 1;
+
       emit(
         state.copyWith(
           currentQuestionIndex: currentQuestionIndex,
         ),
       );
     } else {
-      final currentQuestionIndex = state.questionsList.questions.length;
+      final currentQuestionIndex = state.questionsListModel.questions.length;
       emit(
         state.copyWith(
           type: StateType.loading,

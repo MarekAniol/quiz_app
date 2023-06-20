@@ -3,7 +3,7 @@ part of 'questions_screen_bloc.dart';
 @freezed
 class QuestionsScreenState with _$QuestionsScreenState {
   factory QuestionsScreenState({
-    required QuestionsListModel questionsList,
+    required QuestionsListModel questionsListModel,
     required int currentQuestionIndex,
     required StateType type,
     required List<AnswerModel> answers,
@@ -12,19 +12,20 @@ class QuestionsScreenState with _$QuestionsScreenState {
   QuestionsScreenState._();
 
   factory QuestionsScreenState.initial() => QuestionsScreenState(
-        questionsList: QuestionsListModel.initial(),
+        questionsListModel: QuestionsListModel.initial(),
         currentQuestionIndex: 0,
         type: StateType.loading,
         answers: [],
       );
 
   bool get isQuizComplete =>
-      (currentQuestionIndex == questionsList.questions.length) &&
-      (questionsList.questions.isNotEmpty);
-
-  bool get hasReachedEndOfQuestions => currentQuestionIndex == questionsList.questions.length;
-  QuizQuestionModel get currentQuestionModel => questionsList.questions[currentQuestionIndex];
+      (currentQuestionIndex == questionsListModel.questions.length) &&
+      (questionsListModel.questions.isNotEmpty);
+  bool get hasReachedEndOfQuestions => currentQuestionIndex == questionsListModel.questions.length;
+  bool get isNotLastQuestion => currentQuestionIndex < questionsListModel.questions.length - 1;
+  QuizQuestionModel get currentQuestionModel => questionsListModel.questions[currentQuestionIndex];
   String get currentQuestionText => currentQuestionModel.question;
+  String get corectAnswer => currentQuestionModel.correctAnswer;
 }
 
 extension BuildWhenQuestionScreenExtension on BuildContext {
@@ -33,7 +34,7 @@ extension BuildWhenQuestionScreenExtension on BuildContext {
     QuestionsScreenState current,
   )? buildWhenQuestionScreen() {
     return (previous, current) =>
-        (previous.type != current.type) ||
+        // (previous.type != current.type) ||
         (previous.currentQuestionIndex != current.currentQuestionIndex);
   }
 }
