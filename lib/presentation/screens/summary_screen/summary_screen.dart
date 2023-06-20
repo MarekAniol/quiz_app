@@ -15,17 +15,14 @@ class SummaryScreen extends StatelessWidget {
       width: double.infinity,
       child: BlocBuilder<SummaryScreenBloc, SummaryScreenState>(
         builder: (context, state) {
-          return state.stateType.map(
-              loading: () {
-                return const LoadingPage();
-              },
-              loaded: () {
-                return const Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [Text("Summary Screen")],
-                );
-              },
-              error: () => const LoadingPage());
+          return state.stateType.map(loading: () {
+            return const LoadingPage();
+          }, loaded: () {
+            return const Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [Text("Summary Screen")],
+            );
+          });
         },
       ),
     );

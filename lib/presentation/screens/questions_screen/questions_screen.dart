@@ -15,53 +15,55 @@ class QuestionsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        width: double.infinity,
-        child: BlocConsumer<QuestionsScreenBloc, QuestionsScreenState>(
-          listenWhen: (previous, current) => current.hasReachedEndOfQuestions,
-          listener: (context, state) => state.isQuizComplete
-              ? Navigator.pushNamed(
-                  context,
-                  '/summary_screen',
-                )
-              : null,
-          builder: (context, state) {
-            return state.type.map(
-              loading: () {
-                return const LoadingPage();
-              },
-              loaded: () {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text(
-                      textAlign: TextAlign.center,
-                      state.currentQuestionText,
-                      style: const TextStyle(
-                        color: AppColors.white,
-                        fontSize: 18,
-                      ),
+      width: double.infinity,
+      child: BlocConsumer<QuestionsScreenBloc, QuestionsScreenState>(
+        listenWhen: (previous, current) => current.hasReachedEndOfQuestions,
+        listener: (context, state) => state.isQuizComplete
+            ? Navigator.pushReplacementNamed(
+                context,
+                '/summary_screen',
+              )
+            : null,
+        // buildWhen: (previous, current) => current.type != previous.type,
+        builder: (context, state) {
+          return state.type.map(
+            loading: () {
+              return const LoadingPage();
+            },
+            loaded: () {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    textAlign: TextAlign.center,
+                    state.currentQuestionText,
+                    style: const TextStyle(
+                      color: AppColors.greyBlack,
+                      fontSize: 14,
                     ),
-                    BoxPredefined.verticalSizedBox30,
-                    ...state.currentQuestionModel.shuffledAnswers().map((
-                      answer,
-                    ) {
-                      return AnswerButton(
-                        onPressed: () {
-                          context.read<QuestionsScreenBloc>().add(
-                                QuestionsScreenEvent.questionAnswered(
-                                  answer: answer,
-                                ),
-                              );
-                        },
-                        answerText: answer,
-                      );
-                    }),
-                  ],
-                );
-              },
-            );
-          },
-        ));
+                  ),
+                  BoxPredefined.verticalSizedBox30,
+                  ...state.currentQuestionModel.shuffledAnswers().map((
+                    answer,
+                  ) {
+                    return AnswerButton(
+                      onPressed: () {
+                        context.read<QuestionsScreenBloc>().add(
+                              QuestionsScreenEvent.questionAnswered(
+                                answer: answer,
+                              ),
+                            );
+                      },
+                      answerText: answer,
+                    );
+                  }),
+                ],
+              );
+            },
+          );
+        },
+      ),
+    );
   }
 }

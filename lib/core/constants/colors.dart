@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 abstract class AppColors {
-  static const lightPrimary = Color.fromARGB(255, 222, 194, 248);
-  static const whiteTransparent150 = Color.fromARGB(150, 255, 255, 255);
-  static const white = Color.fromARGB(255, 255, 255, 255);
-  static const answerButtonColor = Color.fromARGB(255, 43, 7, 110);
+  static const questionMarksColor = Color.fromARGB(255, 61, 155, 61);
+  static const greyWhite = Color(0xFFF2F2F2);
+  static const greyBlack = Color(0xFF333333);
+  static const answerButtonColor = Color.fromARGB(255, 50, 168, 50);
 }
