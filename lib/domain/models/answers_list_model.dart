@@ -6,11 +6,13 @@ part 'answers_list_model.freezed.dart';
 class AnswersListModel with _$AnswersListModel {
   factory AnswersListModel({
     required List<AnswerModel> answers,
+    required int correctAnswersCount,
   }) = _AnswersListModel;
 
   const AnswersListModel._();
 
   factory AnswersListModel.initial() => AnswersListModel(
         answers: [],
+        correctAnswersCount: 0,
       );
 }

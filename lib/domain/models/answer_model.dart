@@ -7,6 +7,7 @@ class AnswerModel with _$AnswerModel {
     required String question,
     required String answer,
     required bool isAnswerCorrect,
+    required String correctAnswer,
   }) = _AnswerModel;
 
   const AnswerModel._();
@@ -15,5 +16,6 @@ class AnswerModel with _$AnswerModel {
         question: '',
         answer: '',
         isAnswerCorrect: false,
+        correctAnswer: '',
       );
 }

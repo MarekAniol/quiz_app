@@ -1,7 +1,10 @@
 import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:quiz_app/core/constants/colors.dart';
 import 'package:quiz_app/core/extensions/state_type_extension.dart';
+import 'package:quiz_app/domain/models/answer_model.dart';
 import 'package:quiz_app/domain/models/answers_list_model.dart';
 import 'package:quiz_app/domain/service/quiz_service.dart';
 

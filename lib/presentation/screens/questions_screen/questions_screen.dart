@@ -24,7 +24,6 @@ class QuestionsScreen extends StatelessWidget {
                 '/summary_screen',
               )
             : null,
-        // buildWhen: (previous, current) => current.type != previous.type,
         builder: (context, state) {
           return state.type.map(
             loading: () {
@@ -40,10 +39,11 @@ class QuestionsScreen extends StatelessWidget {
                     state.currentQuestionText,
                     style: const TextStyle(
                       color: AppColors.greyBlack,
-                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
                     ),
                   ),
-                  BoxPredefined.verticalSizedBox30,
+                  BoxPredefined.verticalSizedBox20,
                   ...state.currentQuestionModel.shuffledAnswers().map((
                     answer,
                   ) {
