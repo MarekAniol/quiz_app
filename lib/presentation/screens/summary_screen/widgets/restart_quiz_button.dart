@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/core/constants/colors.dart';
 import 'package:quiz_app/core/constants/strings.dart';
-import 'package:quiz_app/presentation/screens/questions_screen/questions_screen.dart';
+import 'package:quiz_app/presentation/screens/start_screen/start_screen.dart';
 
-class StartQuizButton extends StatelessWidget {
-  const StartQuizButton({super.key});
+class RestartQuizButton extends StatelessWidget {
+  const RestartQuizButton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class StartQuizButton extends StatelessWidget {
       onPressed: () {
         Navigator.pushNamed(
           context,
-          QuestionsScreen.routeName,
+          StartScreen.routeName,
         );
       },
       style: OutlinedButton.styleFrom(
@@ -21,14 +21,14 @@ class StartQuizButton extends StatelessWidget {
         ),
       ),
       icon: const Icon(
-        Icons.play_arrow,
+        Icons.replay,
         color: AppColors.primaryGrayColor,
       ),
       label: const Text(
         style: TextStyle(
           color: AppColors.greyBlack,
         ),
-        Strings.startQuizButtonText,
+        Strings.restartQuizButtonText,
       ),
     );
   }

@@ -39,6 +39,46 @@
                 "8"
             ],
             "correctAnswer": "8"
+        },
+        {
+            "question": "What is the chemical symbol for gold?",
+            "answers": [
+                "G",
+                "Au",
+                "Ag",
+                "Ga"
+            ],
+            "correctAnswer": "Au"
+        },
+        {
+            "question": "Who wrote 'To Kill a Mockingbird'?",
+            "answers": [
+                "Ernest Hemingway",
+                "Harper Lee",
+                "Mark Twain",
+                "J.D. Salinger"
+            ],
+            "correctAnswer": "Harper Lee"
+        },
+        {
+            "question": "What is the tallest mountain in the world?",
+            "answers": [
+                "Mount Everest",
+                "K2",
+                "Kilimanjaro",
+                "Mount McKinley"
+            ],
+            "correctAnswer": "Mount Everest"
+        },
+        {
+            "question": "Who painted the Mona Lisa?",
+            "answers": [
+                "Vincent van Gogh",
+                "Michelangelo",
+                "Leonardo da Vinci",
+                "Pablo Picasso"
+            ],
+            "correctAnswer": "Leonardo da Vinci"
         }
     ]
 }

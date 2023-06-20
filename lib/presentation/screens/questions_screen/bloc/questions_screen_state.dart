@@ -25,7 +25,7 @@ class QuestionsScreenState with _$QuestionsScreenState {
   bool get isNotLastQuestion => currentQuestionIndex < questionsListModel.questions.length - 1;
   QuizQuestionModel get currentQuestionModel => questionsListModel.questions[currentQuestionIndex];
   String get currentQuestionText => currentQuestionModel.question;
-  String get corectAnswer => currentQuestionModel.correctAnswer;
+  String get correctAnswer => currentQuestionModel.correctAnswer;
 }
 
 extension BuildWhenQuestionScreenExtension on BuildContext {

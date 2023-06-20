@@ -67,7 +67,8 @@ class QuestionsScreenBloc extends Bloc<QuestionsScreenEvent, QuestionsScreenStat
       final answerModel = AnswerModel(
         question: state.currentQuestionText,
         answer: event.answer,
-        isAnswerCorrect: event.answer == state.corectAnswer,
+        isAnswerCorrect: event.answer == state.correctAnswer,
+        correctAnswer: state.correctAnswer,
       );
       List<AnswerModel> listOfAnswers = [...state.answers];
       listOfAnswers.add(answerModel);
@@ -87,15 +88,31 @@ class QuestionsScreenBloc extends Bloc<QuestionsScreenEvent, QuestionsScreenStat
       );
     } else {
       final currentQuestionIndex = state.questionsListModel.questions.length;
+
+      final answerModel = AnswerModel(
+        question: state.currentQuestionText,
+        answer: event.answer,
+        isAnswerCorrect: event.answer == state.correctAnswer,
+        correctAnswer: state.correctAnswer,
+      );
+      List<AnswerModel> listOfAnswers = [...state.answers];
+      listOfAnswers.add(answerModel);
+
       emit(
         state.copyWith(
           type: StateType.loading,
+          answers: listOfAnswers,
           currentQuestionIndex: currentQuestionIndex,
         ),
       );
 
       final AnswersListModel answersListModel = AnswersListModel(
         answers: state.answers,
+        correctAnswersCount: state.answers
+            .where(
+              (element) => element.isAnswerCorrect,
+            )
+            .length,
       );
 
       await _quizListService.saveAnswersToFile(

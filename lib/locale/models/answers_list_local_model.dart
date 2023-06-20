@@ -4,17 +4,21 @@ import 'package:quiz_app/locale/models/answer_local_model.dart';
 class AnswersListLocalModel {
   const AnswersListLocalModel({
     required this.answers,
+    required this.correctAnswersCount,
   });
 
   final List<AnswerLocalModel> answers;
+  final int correctAnswersCount;
 
-  factory AnswersListLocalModel.fromJson(Map<String, dynamic> parsedJson) {
-    final List<dynamic> list = parsedJson['answers'] as List;
+  factory AnswersListLocalModel.fromJson(Map<String, dynamic> json) {
+    final List<dynamic> list = json['answers'] as List;
+    final int correctAnswersCount = json['correctAnswersCount'] as int;
     List<AnswerLocalModel> answers =
         list.map((answer) => AnswerLocalModel.fromJson(answer)).toList();
 
     return AnswersListLocalModel(
       answers: answers,
+      correctAnswersCount: correctAnswersCount,
     );
   }
 
@@ -22,6 +26,7 @@ class AnswersListLocalModel {
     final Map<String, dynamic> data = <String, dynamic>{};
 
     data['answers'] = answers.map((answer) => answer.toJson()).toList();
+    data['correctAnswersCount'] = correctAnswersCount;
 
     return data;
   }
@@ -30,12 +35,12 @@ class AnswersListLocalModel {
 extension AnswersListLocalModelX on AnswersListLocalModel {
   AnswersListModel toDomain() {
     return AnswersListModel(
-      answers: answers
-          .map(
-            (answer) => answer.toDomain(),
-          )
-          .toList(),
-    );
+        answers: answers
+            .map(
+              (answer) => answer.toDomain(),
+            )
+            .toList(),
+        correctAnswersCount: correctAnswersCount);
   }
 }
 
@@ -47,6 +52,7 @@ extension AnswersListModelX on AnswersListModel {
             (answer) => answer.toLocale(),
           )
           .toList(),
+      correctAnswersCount: correctAnswersCount,
     );
   }
 }
