@@ -20,5 +20,15 @@ class SummaryScreenState with _$SummaryScreenState {
   String get correctAnswersText =>
       'You answered $correctAnswers out of $totalQuestions questions correctly';
 
-  AnswerModel answerByIndex(int index) => answersListModel.answers[index];
+  AnswerModel answerModelByIndex(int index) => answersListModel.answers[index];
+  int questionNumber(int index) => index + 1;
+
+  String questionByIndex(int index) => answerModelByIndex(index).question;
+  String answerByIndex(int index) => 'Your answer: ${answerModelByIndex(index).answer}';
+  String correctAnswerByIndex(int index) =>
+      'Correct answer: ${answerModelByIndex(index).correctAnswer}';
+
+  Color setColorByAnswer(int index) => answerModelByIndex(index).isAnswerCorrect
+      ? AppColors.primaryGreenColor
+      : AppColors.primaryRedColor;
 }

@@ -17,12 +17,12 @@ class RestartQuizButton extends StatelessWidget {
       },
       style: OutlinedButton.styleFrom(
         side: const BorderSide(
-          color: AppColors.primaryGrayColor,
+          color: AppColors.primaryGreenColor,
         ),
       ),
       icon: const Icon(
         Icons.replay,
-        color: AppColors.primaryGrayColor,
+        color: AppColors.primaryGreenColor,
       ),
       label: const Text(
         style: TextStyle(

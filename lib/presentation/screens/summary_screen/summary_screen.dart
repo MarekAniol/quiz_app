@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quiz_app/core/constants/colors.dart';
 import 'package:quiz_app/core/constants/dimensiones.dart';
 import 'package:quiz_app/core/extensions/state_type_extension.dart';
 import 'package:quiz_app/presentation/screens/summary_screen/bloc/summary_screen_bloc.dart';
@@ -27,6 +28,11 @@ class SummaryScreen extends StatelessWidget {
                   children: [
                     Text(
                       state.correctAnswersText,
+                      style: const TextStyle(
+                        color: AppColors.greyBlack,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                     BoxPredefined.verticalSizedBox30,
                     const QuestionsSummary(),
