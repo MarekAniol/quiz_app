@@ -18,9 +18,12 @@ abstract class BoxPredefined {
   static SizedBox get verticalSizedBox20 => const SizedBox(
         height: 20.0,
       );
+  static SizedBox get verticalSizedBox6 => const SizedBox(
+        height: 6.0,
+      );
 
   static SizedBox get horizontalSizedBox10 => const SizedBox(
-        width: 10.0,
+        width: 12.0,
       );
 }
 
