@@ -46,7 +46,7 @@ class QuestionsScreenBloc extends Bloc<QuestionsScreenEvent, QuestionsScreenStat
   }
 
   Future<void> _mapQuestionReaded(
-    _QuestionsReaded event,
+    _AnswerShowed event,
     Emitter<QuestionsScreenState> emit,
   ) async {
     final questionsListModel = await _quizListService.getQuestionList();

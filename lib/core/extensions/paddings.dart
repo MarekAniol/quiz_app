@@ -19,12 +19,8 @@ extension AnswerButtonPaddingExtension on BuildContext {
   }
 
   EdgeInsets get listOfAnswersPadding {
-    return MediaQuery.of(this).orientation == Orientation.portrait
-        ? const EdgeInsets.only(
-            top: 10,
-          )
-        : const EdgeInsets.only(
-            top: 5,
-          );
+    return const EdgeInsets.symmetric(
+      vertical: 10,
+    );
   }
 }

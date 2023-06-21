@@ -31,4 +31,10 @@ class SummaryScreenState with _$SummaryScreenState {
   Color setColorByAnswer(int index) => answerModelByIndex(index).isAnswerCorrect
       ? AppColors.primaryGreenColor
       : AppColors.primaryRedColor;
+
+  IconData setIconByAnswer(int index) =>
+      answerModelByIndex(index).isAnswerCorrect ? Icons.check : Icons.close;
+
+  bool isFirstQuestion(int index) => index == 0;
+  bool isAnswerCorrect(int index) => answerModelByIndex(index).isAnswerCorrect;
 }
